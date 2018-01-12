@@ -5,7 +5,7 @@
 		<title></title>
 		<link rel="stylesheet" href="css/list.css" />
 	</head>
-	<body>
+	<body>		
 		<div class="wrap">
 			<div class="wrap-hd clearfix">
 				<form id="searchForm">
@@ -35,8 +35,13 @@
 					<button class="btn" id="delBtn" type="button">删除</button>
 				</div>
 			</div>
-	
-	
+			
+	<script type="text/javascript" src="js/jquery-1.11.1.js" ></script>
+	<script type="text/javascript" src="js/underscore-min.js" ></script>	
+	<!--<script type="text/template">-->
+		
+		
+		
 	<table class="wrap-bd" border="1">
 				<tbody><tr>
 					<th><input type="checkbox" id="allChoose"></th>
@@ -143,6 +148,18 @@
 			
 				
 		</div>
+<!--		
+		</script>-->
+		
+		
+		
+		
+	<!--<script>
+		var url='C:\Users\lx\Desktop\data-process\data-process\demo-初始版本\json'
+		$.get(url,function(str){
+			console.log(str)
+		})
+	</script>-->
 		<script type="text/html" id="addHtml">
 			<form>
 				<div class="item clearfix">
@@ -193,10 +210,102 @@
 				</div>
 			</form>
 		</script>
+		
+
 		<script type="text/javascript" src="js/jquery.min.js" ></script>
 		<script type="text/javascript" src="js/template.js" ></script>
 		<script type="text/javascript" src="js/box.js" ></script>
-		<script type="text/javascript" src="js/utils.js" ></script>
-		<script type="text/javascript" src="js/list.js" ></script>
+		<!--<script type="text/javascript" src="js/utils.js" ></script>-->
+		<!--<script type="text/javascript" src="js/list.js" ></script>-->
 	</body>
 </html>
+<script>
+	var zack=true;
+	$(function(){
+
+		
+		
+		//添加
+		$('#addBtn').click(function(){
+			
+			if(!zack){
+				return
+			}
+			zack=false;
+			
+			var a=$('#addHtml').html();
+		
+
+			$('body').append($(a));
+//			console.log($(a))
+			$('#submitBtn').click(function(){
+//			console.log('我进来了')
+				//var b=$('.inp-text:eq(2)')	;//console.log(b);//console.log(this)
+			var name=$('.inp-text:eq(2)').val();	//console.log(name);	
+			var age=$('.inp-text:eq(3)').val();//console.log(age)
+			var sex=$('.inp-text:eq(3)').parent().parent().parent().find('.inp-radio:checked').index();//console.log(sex)//0 1
+			var jiguan=$('.inp-text:eq(4)').val();//console.log(jiguan)
+			var id=$('.inp-text:eq(5)').val();
+			var phone=$('.inp-text:eq(6)').val();
+			var job=$('.inp-text:eq(7)').val();//console.log(job)
+			if(sex==0){
+				sex='男'
+			}else{
+				sex=='女'
+			}
+			var obj = {
+        		name: name,
+                age: age,
+                sex: sex,
+                jiguan:jiguan,
+                id:id,
+                phone:phone,
+                job:job,
+          }
+			var str='';
+			str+='<tr><td><input type="checkbox"></td>';
+	    	for(var k in obj){	
+	        	str+='<td>';
+				str+=obj[k];
+				str+='</td>';
+			}str+='<td><button id="updateBtn" type="button">修改</button><button id="delBtn" type="button">删除</button></td></tr>';
+			$('tbody').append(str);	
+
+				zack=true;
+			
+			$('form:eq(1)').remove();
+
+			})
+			
+			
+			})
+		//全选反选择 未完成
+			$('#allChoose').click(function(){//console.log('hah')
+			var a=$('#allChoose').prop('checked');
+			$('tbody input:gt(0)').prop('checked',a);
+			})
+		
+			$('.choose').click(function(){//console.log($('tbody input:gt(0)'))
+			var b=$('.choose').length;
+			var c=$('.choose:checked').length;
+			if(b==c){
+			$('#allChoose').prop('checked',true);
+			}else{
+			$('#allChoose').prop('checked',false);	
+			}
+			})
+		
+		//删除
+		console.log($('button:gt(2)'))
+		var bt=$('button:gt(2)')
+		console.log(bt[0])
+		
+				$('#delBtn').click(function(){
+					console.log('哈哈')
+//					$(this).parent().parent().remove();
+				})
+		
+	})
+	
+</script>
+	
